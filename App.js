@@ -1,32 +1,25 @@
 import { StatusBar } from "expo-status-bar";
 import { useState, useLayoutEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { Container, SafeContainer, StyledText } from "./assets/css/app";
+import {
+  Container,
+  SafeContainer,
+  StyledText,
+  themeConfig,
+  StyledIcon,
+} from "./assets/css/app";
 import { ThemeProvider } from "styled-components/native";
 import Button from "./assets/component/button";
+import { Provider } from "react-redux";
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function App() {
   const [theme, setTheme] = useState("light");
-  const themeConfig = {
-    light: {
-      color: "black",
-      bgColor: "#90caf9",
-      fontSize: "16px",
-    },
-    dark: {
-      color: "white",
-      bgColor: "#757575",
-      fontSize: "11px",
-    },
-  };
   const resTheme = themeConfig[theme];
 
   const handleTheme = () => {
     setTheme(theme == "light" ? "dark" : "light");
-  };
-
-  const handleTest = () => {
-    alert("Test");
   };
 
   return (
@@ -36,15 +29,9 @@ export default function App() {
           <StyledText color="red" size="50px">
             Hello !
           </StyledText>
-          <StyledText>안녕하세요 성민 입니다</StyledText>
-          <Button
-            title={theme == "light" ? "어둡게" : "밝게"}
-            color="blue"
-            toggle="show"
-            onPress={handleTheme}
-          />
+          <StyledText>안녕하세요 CST 안녕하세요 aa입니다</StyledText>
         </Container>
-        <StatusBar style="auto" />
+        <StatusBar style={theme == "light" ? "dark" : "light"} />
       </SafeContainer>
     </ThemeProvider>
   );
