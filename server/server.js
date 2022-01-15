@@ -7,7 +7,6 @@ const app = express();
 const Http = require("http");
 const http = Http.createServer(app);
 const router = express.Router();
-const Summoner = require("../model/Summoner");
 const cors = require("cors");
 const io = socketIo(http, {
   cors: {

@@ -4,19 +4,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/Ionicons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
-const themeConfig = {
-  light: {
-    color: "black",
-    bgColor: "white",
-    fontSize: "14px",
-  },
-  dark: {
-    color: "white",
-    bgColor: "#191919",
-    fontSize: "14px",
-  },
-};
-
 function StyledIcon({ name, theme, color, size }) {
   const resTheme = themeConfig[theme];
   const themeColor = color || resTheme.color;
@@ -25,25 +12,44 @@ function StyledIcon({ name, theme, color, size }) {
   return <Icon name={name} size={themeSize} color={resTheme?.color} />;
 }
 
+const themeConfig = {
+  light: {
+    baseBackground: "#fff",
+    color: "#1b1b1b",
+  },
+  dark: {
+    color: "white",
+    bgColor: "#191919",
+    fontSize: "14px",
+  },
+};
+
+const defaultStyleConfig = {
+  fontSize: {
+    mini: "9px",
+    small: "11px",
+    base: "13px",
+    big: "15px",
+  },
+  padding: {
+    base: "12px",
+  },
+};
+
 const Container = styled.View`
   display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100%;
-  background-color: ${(props) => props?.theme?.bgColor};
+  background-color: ${(props) => props?.theme?.baseBackground};
+  padding: ${(props) => props?.padding || defaultStyleConfig.padding.base};
 `;
 
-const SafeContainer = styled.SafeAreaView`
+const StyledView = styled.View`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  background-color: ${(props) => props?.theme?.bgColor};
 `;
 
 const StyledText = styled.Text`
-  font-size: ${(props) => props?.size || props?.theme?.fontSize};
+  font-size: ${(props) => props?.size || defaultStyleConfig.fontSize.base};
   color: ${(props) => props?.color || props?.theme?.color};
 `;
 
-export { Container, SafeContainer, StyledText, themeConfig, StyledIcon };
+export { Container, StyledText, StyledView, themeConfig, StyledIcon };
